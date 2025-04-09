@@ -1,10 +1,27 @@
 function payRateCalculate() {
-  let workDays = (document.getElementById("workDays").value).trim();
+  let workDays = parseInt((document.getElementById("workDays").value).trim());
   let selectObj = document.getElementById("year");
   let yearOfStudy = parseInt(selectObj.options[selectObj.selectedIndex].value);
-  //alert("yearOfStudy = "+yearOfStudy);
-  
-  return 0;
+
+  let payPerDay = 0;
+
+  switch (yearOfStudy) {
+    case 1:
+      payPerDay = 300;
+      break;
+    case 2:
+      payPerDay = 350;
+      break;
+    case 3:
+      payPerDay = 400;
+      break;
+    case 4:
+      payPerDay = 450;
+      break;
+    default:
+      payPerDay = 0;
+  }
+
+  let weeklyPay = payPerDay * workDays;
+  return weeklyPay;
 }
-
-
