@@ -1,35 +1,39 @@
 function checkNID() {
-  let nid = (document.getElementById("nid").value).trim();
-  if(isNaN(nid)){
-	return false;
-  }else{
-	return true;
+  let nid = document.getElementById("nid").value.trim();
+  if (isNaN(nid) || nid.length !== 13) {
+    return false;
   }
+  return true;
 }
 
 function checkWorkDays() {
-  let num = (document.getElementById("workDays").value).trim();
-  if (isNaN(num)) {
+  let num = parseInt(document.getElementById("workDays").value.trim());
+  if (isNaN(num) || num < 1 || num > 6) {
     return false;
-  } else {
-	return true;
   }
+  return true;
 }
 
-function validateForm(){
-	if(!checkNID()){
-	  alert("Invalid value for National ID!");
-	  document.getElementById("nid").focus();
-	  return false;
-	}else{
-		if(!checkWorkDays()){
-		  alert("Invalid value for days of work!");
-		  document.getElementById("workDays").focus();
-		  return false;
-		}else{
-			total = payRateCalculate();
-			alert("Your weekly pay rate is "+total+" THB");
-			return false;
-		}
-	}
+function validateForm() {
+  let genderChecked = document.querySelector('input[name="genderRad"]:checked');
+  if (!genderChecked) {
+    alert("Please select your gender!");
+    return false;
+  }
+
+  if (!checkNID()) {
+    alert("Invalid value for National ID!");
+    document.getElementById("nid").focus();
+    return false;
+  } else {
+    if (!checkWorkDays()) {
+      alert("Invalid value for days of work!");
+      document.getElementById("workDays").focus();
+      return false;
+    } else {
+      total = payRateCalculate();
+      alert("Your weekly pay rate is " + total + " THB");
+      return false;
+    }
+  }
 }
